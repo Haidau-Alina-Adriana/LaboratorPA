@@ -1,0 +1,16 @@
+Proiectul contine clasa principala Main, in care am declarat un obiect lab1 de tip Main. Pentru acest obiect am 
+apelat pe rand metodele pe care le contine clasa, respectiv compulsory(), homework(args) si bonus().
+Datorita faptului ca acest program necesita si argumente care vor fi preluate in String[] args, 
+am facut si o validare ca parametrii sunt: numar, numar, cel putin un caracter.
+
+1. Compulsory:
+Metoda compulsory va afisa prima data pe ecran mesajul "Hello World". Am creat apoi un array de string-uri ce contine mai multe string-uri. Am creat o variabila n ce va lua o valoare random intre 0 si 999999, apoi am inmultit numarul cu 3, am adunat numarul 0b10101 si 0xFF, apoi am inmultit cu 6. Am creat apoi variabila result ce va calcula suma cifrelor unui numar pana cand suma este de o singura cifra (in cazul in care dupa o iteratie rezultatul are mai multe cifre, se va actualiza result-ul cu 0 si noul n cu valoarea result-ului calculat anterior), apoi am afisat string-ul de la pozitia result.
+
+2. Homework: 
+Metoda homework are pentru inceput 2 variabile n si p, corespunzatoare primilor doua argumente date si un array de char-uri in care vor fi salvate literele ce pot alcatui cuvinte(tot date ca argumente). Apoi am creat un array de string-uri de marime n in care se vor salva n cuvinte, fiecare de marime p. Cuvintele sunt create apeland functia createRandWord: functia construieste un string in functie de un k (corespunzator pozitiei din alfabetul disponibil) care este generat random pentru fiecare iteratie
+a buclei for; dupa cele p caractere adaugate, se returneaza reprezentarea obiectului ca un string. Dupa ce s-au creat cele n cuvinte, am creat o matrice de tip boolean in care am salvat daca 2 cuvinte sunt vecine(false-> nu sunt vecine, true->sunt vecine) astfel: daca am ajuns in punctul de a verifica daca un cuvant este vecin cu el 
+insusi, atunci in matrice se va pune false, altfel verific cu functia foundCommonLetter daca am gasit cel putin o litera comuna atunci voi pune in matrice true, altfel false. Functia foundCommonLetter va parcurge fiecare litera din primul cuvant si va verifica daca al doilea cuvant va contine litera respectiva (wordTwo.contains(letter)): daca da, atunci sunt vecini, altfel daca ajung pana la finalul cuvantului unu, nu sunt vecini.
+Pentru structura care salveaza vecinii am folosit tot o matrice de string-uri, ce va contine cuvintele ce au true in matricea de adiacenta. In cazul in care n este mai mic decat 30000 voi afisa matricea de vecini, altfel afisez timpul in nanosecunde pentru cat dureaza operatiile anterioare.
+
+3. Bonus:
+Nu am implementat inca.

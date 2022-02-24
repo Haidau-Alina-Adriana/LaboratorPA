@@ -5,7 +5,7 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-        Main lab1 = new Main(); 
+        Main lab1 = new Main();
         lab1.compulsory();
         if (args.length < 3) {
             System.out.println("Usage: number, number, one or more characters");
@@ -76,13 +76,13 @@ public class Main {
             }
         }
 
-        String[][] neighbour = new String[n][n];
+        String[][] neighbours = new String[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (adjacencyMatrix[i][j]) {
-                    neighbour[i][j] = words[j];
+                    neighbours[i][j] = words[j];
                 } else {
-                    neighbour[i][j] = "";
+                    neighbours[i][j] = "";
                 }
             }
         }
@@ -95,7 +95,7 @@ public class Main {
             System.out.println("Neighbour array: ");
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    System.out.print(neighbour[i][j] + " ");
+                    System.out.print(neighbours[i][j] + " ");
                 }
                 System.out.println();
             }
