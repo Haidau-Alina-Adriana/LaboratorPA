@@ -7,13 +7,15 @@ public class Main {
     public static void main(String[] args) {
         Main lab1 = new Main();
         lab1.compulsory();
-        if (args.length < 3) {
+        if (args.length < 3) { //check if there are at least 3 arguments
             System.out.println("Usage: number, number, one or more characters");
+            System.exit(-1);
+        } else if (!lab1.isPositiveAndNumeric(args[0]) || !lab1.isPositiveAndNumeric(args[1])) { //if the first 2 arguments are numbers
+            System.out.println("Only positive numbers");
             System.exit(-1);
         }
         lab1.homework(args);
         lab1.bonus();
-
     }
 
     void compulsory() {
@@ -43,7 +45,7 @@ public class Main {
         int p = Integer.parseInt(args[1]);
         int m = args.length - 2;
         char[] alphabet = new char[m];
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < m; i++) { //take the rest of the arguments
             alphabet[i] = args[i + 2].charAt(0);
         }
 
@@ -67,11 +69,7 @@ public class Main {
                 if (i == j) {
                     adjacencyMatrix[i][j] = false;
                 } else {
-                    if (foundCommonLetter(words[i], words[j]) != -1) {
-                        adjacencyMatrix[i][j] = true;
-                    } else {
-                        adjacencyMatrix[i][j] = false;
-                    }
+                    adjacencyMatrix[i][j] = foundCommonLetter(words[i], words[j]);
                 }
             }
         }
@@ -103,15 +101,27 @@ public class Main {
         }
     }
 
-    int foundCommonLetter(String wordOne, String wordTwo) {
+    boolean isPositiveAndNumeric(String word) {
+        if (word.charAt(0) == '-') {
+            return false;
+        } else {
+            for (int i = 0, n = word.length(); i < n; i++) {
+                if (!Character.isDigit(word.charAt(i)))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    boolean foundCommonLetter(String wordOne, String wordTwo) {
         for (int i = 0, len = wordOne.length(); i < len; i++) {
             char l = wordOne.charAt(i);
             String letter = Character.toString(l);
             if (wordTwo.contains(letter)) {
-                return 1;
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 
     String createRandWord(char[] alphabet, int p) {
