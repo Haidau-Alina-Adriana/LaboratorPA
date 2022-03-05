@@ -6,6 +6,13 @@ public abstract class Room {
     protected String type;
     private int capacity;
 
+    /**
+     * Constructor cu toti parametrii
+     *
+     * @param name     numele salii
+     * @param type     tipul salii
+     * @param capacity capacitatea salii
+     */
     public Room(String name, String type, int capacity) {
         this.name = name;
         this.type = type;

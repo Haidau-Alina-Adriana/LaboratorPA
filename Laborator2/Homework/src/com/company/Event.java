@@ -7,6 +7,14 @@ public class Event {
     private int start;
     private int end;
 
+    /**
+     * Constructor pentru clasa Event pentru toti parametrii
+     *
+     * @param name  numele evenimentului
+     * @param size  numarul de persoane ce participa la eveniment
+     * @param start timpul inceperii evenimentului
+     * @param end   timpul de sfarsit al evenimentului
+     */
     public Event(String name, int size, int start, int end) {
         this.name = name;
         this.size = size;
