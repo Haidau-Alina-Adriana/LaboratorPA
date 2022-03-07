@@ -3,19 +3,16 @@ package com.company;
 public abstract class Room {
 
     private String name;
-    protected String type;
     private int capacity;
 
     /**
      * Constructor cu toti parametrii
      *
      * @param name     numele salii
-     * @param type     tipul salii
      * @param capacity capacitatea salii
      */
-    public Room(String name, String type, int capacity) {
+    public Room(String name, int capacity) {
         this.name = name;
-        this.type = type;
         this.capacity = capacity;
     }
 
@@ -25,14 +22,6 @@ public abstract class Room {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    void setType(String type) {
-        this.type = type;
     }
 
     public int getCapacity() {
@@ -47,7 +36,6 @@ public abstract class Room {
     public String toString() {
         return "Room(" +
                 "name='" + name + '\'' +
-                ", type=" + type +
                 ", capacity=" + capacity +
                 ')';
     }

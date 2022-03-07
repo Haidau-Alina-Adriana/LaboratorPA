@@ -20,10 +20,10 @@ public class Main {
 //        Event e7 = new Event("L5", 30, 8, 10);
 //        Event e8 = new Event("L6", 30, 8, 10);
 
-        ComputerLab r1 = new ComputerLab("401", "ComputerLab", 30, true);
-        ComputerLab r2 = new ComputerLab("403", "ComputerLab", 30, true);
-        ComputerLab r3 = new ComputerLab("405", "ComputerLab", 30, false);
-        LectureHall r4 = new LectureHall("309", "LectureHall", 100, "Windows 10");
+        ComputerLab r1 = new ComputerLab("401",  30, true);
+        ComputerLab r2 = new ComputerLab("403",  30, true);
+        ComputerLab r3 = new ComputerLab("405",  30, false);
+        LectureHall r4 = new LectureHall("309",  100, "Windows 10");
 
         problem.addEvent(e1);
         problem.addEvent(e2);

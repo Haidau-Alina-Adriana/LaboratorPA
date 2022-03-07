@@ -70,8 +70,7 @@ public class Problem {
         }
         System.out.println("Rooms: ");
         for (int i = 0, n = rooms.size(); i < n; i++) {
-            System.out.println("Room " + (i + 1) + " -> name: " + rooms.get(i).getName() + ", capacity: " + rooms.get(i).getCapacity() +
-                    ", type: " + rooms.get(i).getType());
+            System.out.println("Room " + (i + 1) + " -> name: " + rooms.get(i).getName() + ", capacity: " + rooms.get(i).getCapacity());
         }
     }
 

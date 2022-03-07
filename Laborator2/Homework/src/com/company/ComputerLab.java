@@ -8,12 +8,11 @@ public class ComputerLab extends Room {
      * Constructor mostenit cu toti parametrii
      *
      * @param name         numele salii
-     * @param type         tipul salii
      * @param capacity     capacitatea salii
      * @param hasProjector valoarea de adevar al faptului ca sala are proiector
      */
-    public ComputerLab(String name, String type, int capacity, boolean hasProjector) {
-        super(name, type, capacity);
+    public ComputerLab(String name, int capacity, boolean hasProjector) {
+        super(name, capacity);
         this.hasProjector = hasProjector;
     }
 
@@ -25,8 +24,4 @@ public class ComputerLab extends Room {
         this.hasProjector = hasProjector;
     }
 
-    @Override
-    void setType(String type) {
-        this.type = type;
-    }
 }

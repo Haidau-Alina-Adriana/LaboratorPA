@@ -8,12 +8,11 @@ public class LectureHall extends Room {
      * Constructor mostenit cu toti parametrii
      *
      * @param name            numele salii
-     * @param type            tipul salii
      * @param capacity        capacitatea salii
      * @param operatingSystem tipul sistemului de operare al calculatoarelor din sala
      */
-    public LectureHall(String name, String type, int capacity, String operatingSystem) {
-        super(name, type, capacity);
+    public LectureHall(String name, int capacity, String operatingSystem) {
+        super(name, capacity);
         this.operatingSystem = operatingSystem;
     }
 
@@ -25,8 +24,4 @@ public class LectureHall extends Room {
         this.operatingSystem = operatingSystem;
     }
 
-    @Override
-    void setType(String type) {
-        this.type = type;
-    }
 }
