@@ -1,12 +1,14 @@
 package com.company;
 
-public class Switch extends Node implements Identifiable {
-    private String address;
+public class Switch extends Node {
     private int layer;
 
-    public Switch(String address, int layer) {
+    public Switch() {
+        this.layer = 2;
+    }
+
+    public Switch(int layer) {
         this.layer = layer;
-        this.address = address;
     }
 
     public int getLayer() {
@@ -15,15 +17,6 @@ public class Switch extends Node implements Identifiable {
 
     public void setLayer(int layer) {
         this.layer = layer;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Override
-    public String getAddress() {
-        return address;
     }
 
     @Override

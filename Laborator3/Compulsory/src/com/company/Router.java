@@ -3,6 +3,10 @@ package com.company;
 public class Router extends Node implements Identifiable {
     private String address;
 
+    public Router() {
+        this.address = "";
+    }
+
     public Router(String address) {
         this.address = address;
     }

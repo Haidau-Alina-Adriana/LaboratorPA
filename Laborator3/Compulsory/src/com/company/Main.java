@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
         Computer v1 = new Computer("", 16);
         Router v2 = new Router("");
-        Switch v3 = new Switch("", 2);
-        Switch v4 = new Switch("", 3);
+        Switch v3 = new Switch(2);
+        Switch v4 = new Switch(3);
         Router v5 = new Router("");
         Computer v6 = new Computer("", 32);
 
@@ -29,7 +29,7 @@ public class Main {
         networkNodes.add(v6);
 
         Network network = new Network(networkNodes);
-        for (int i = 0, n = networkNodes.size(); i < n; i++) {
+        for (int i = 0, n = network.getNodes().size(); i < n; i++) {
             System.out.println("Node " + i + " : " + networkNodes.get(i).getName());
         }
 

@@ -4,6 +4,11 @@ public class Computer extends Node implements Identifiable, Storage {
     private String address;
     private int storageCapacity;
 
+    public Computer() {
+        this.address = "";
+        this.storageCapacity = 0;
+    }
+
     public Computer(String address, int storageCapacity) {
         this.address = address;
         this.storageCapacity = storageCapacity;
