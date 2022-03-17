@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
         Computer v1 = new Computer("", 16);
         Router v2 = new Router("");
-        Switch v3 = new Switch(2);
-        Switch v4 = new Switch(3);
+        Switch v3 = new Switch(true);
+        Switch v4 = new Switch(false);
         Router v5 = new Router("");
         Computer v6 = new Computer("", 32);
 

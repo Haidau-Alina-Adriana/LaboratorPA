@@ -1,28 +1,28 @@
 package com.company;
 
 public class Switch extends Node {
-    private int layer;
+    private boolean managed;
 
     public Switch() {
-        this.layer = 2;
+        this.managed = true;
     }
 
-    public Switch(int layer) {
-        this.layer = layer;
+    public Switch(boolean managed) {
+        this.managed = managed;
     }
 
-    public int getLayer() {
-        return layer;
+    public boolean isManaged() {
+        return managed;
     }
 
-    public void setLayer(int layer) {
-        this.layer = layer;
+    public void setManaged(boolean managed) {
+        this.managed = managed;
     }
 
     @Override
     public String toString() {
         return "Switch{" +
-                "layer=" + layer +
+                "managed=" + managed +
                 '}';
     }
 }
