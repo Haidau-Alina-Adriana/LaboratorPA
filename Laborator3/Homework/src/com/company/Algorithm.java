@@ -28,7 +28,6 @@ public class Algorithm {
         for (int i = 0; i < unvisitedNodes.size(); i++) {
             int smallerTime = Integer.MAX_VALUE;
             Node currentNode = unvisitedNodes.get(i);
-            System.out.println(currentNode.getName());
             for (Map.Entry<Node, Integer> entry : times.entrySet()) {
                 if (entry.getValue() < smallerTime && !visitedNodes.contains(entry.getKey())) {
                     smallerTime = entry.getValue();
