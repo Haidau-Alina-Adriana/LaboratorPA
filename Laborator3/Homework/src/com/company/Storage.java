@@ -1,20 +1,17 @@
 package com.company;
 
-import java.math.BigInteger;
-
 public interface Storage {
     int getStorageCapacity();
 
-    default BigInteger getStorageCapacityInMB(int storageCapacity) {
-        return BigInteger.valueOf(storageCapacity).multiply(new BigInteger("1000"));
+    default double getStorageCapacityInMB() {
+        return getStorageCapacity() * 1024;
     }
 
-    default BigInteger getStorageCapacityInKB(int storageCapacity) {
-        return BigInteger.valueOf(storageCapacity).multiply(new BigInteger("1000000"));
+    default double getStorageCapacityInKB() {
+        return getStorageCapacity() * Math.pow(1024, 2);
     }
 
-    default BigInteger getStorageCapacityInBytes(int storageCapacity) {
-        return BigInteger.valueOf(storageCapacity).multiply(new BigInteger("1000000000"));
-
+    default double getStorageCapacityInBytes(int storageCapacity) {
+        return getStorageCapacity() * Math.pow(1024, 3);
     }
 }
