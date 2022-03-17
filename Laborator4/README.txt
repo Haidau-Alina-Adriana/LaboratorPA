@@ -1,0 +1,5 @@
+1. Compulsory:
+Am creat un proiect Maven si am actualizat fisierul pom.xml.
+Am creat clasele Intersection si Street. Clasa Intersection are ca atribut un nume, 2 constructori, settere, gettere, metodele toString si equals. Clasa Street are ca atribute un nume, o lungime si un vector de marime 2 in care se afla capetele unei strazi, capetele fiind in cazul nostru 2 intersectii. Clasa mai contine 2 constructori, settere, gettere, toString si metoda compareTo folosita pentru a compara 2 strazi dupa nume. In clasa Main am creat intersectiile folosindu-ma de stream-uri, apoi am creat o lista streets de tip LinkedList in care am pus obiectele de tip street din exemplu. Am sortat lista de strazi in functie de lungimea acestora. Am creat o multime de tip HashSet initializata cu vectorul de intersectii creat cu un stream si apoi am parcurs multimea de intersectii si am verificat daca gasesc 2 intersectii care au acelasi nume si nu sunt referinte la acelasi obiect.
+
+2. Homework: 
