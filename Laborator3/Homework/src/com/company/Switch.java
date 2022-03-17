@@ -1,35 +1,28 @@
 package com.company;
 
-public class Switch extends Node implements Identifiable {
-    private String address;
-    private int layer;
+public class Switch extends Node {
+    private boolean managed;
 
-    public Switch(String address, int layer) {
-        this.layer = layer;
-        this.address = address;
+    public Switch() {
+        this.managed = true;
     }
 
-    public int getLayer() {
-        return layer;
+    public Switch(boolean managed) {
+        this.managed = managed;
     }
 
-    public void setLayer(int layer) {
-        this.layer = layer;
+    public boolean isManaged() {
+        return managed;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Override
-    public String getAddress() {
-        return address;
+    public void setManaged(boolean managed) {
+        this.managed = managed;
     }
 
     @Override
     public String toString() {
         return "Switch{" +
-                "layer=" + layer +
+                "managed=" + managed +
                 '}';
     }
 }

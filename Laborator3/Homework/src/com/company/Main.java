@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
         Computer v1 = new Computer("", 16);
         Router v2 = new Router("");
-        Switch v3 = new Switch("", 2);
-        Switch v4 = new Switch("", 3);
+        Switch v3 = new Switch(true);
+        Switch v4 = new Switch(false);
         Router v5 = new Router("");
         Computer v6 = new Computer("", 32);
 
@@ -19,11 +19,11 @@ public class Main {
         v2.setHardwareAddress("00-0A-29-6C-F3-E5");
         v2.setCost(v3, 20);
         v2.setCost(v4, 20);
-        v2.setCost(v5, 10);
+        v2.setCost(v5, 20);
 
         v3.setName("Switch A");
         v3.setHardwareAddress("00-FF-71-B3-E4-48");
-        v3.setCost(v4, 20);
+        v3.setCost(v4, 10);
 
         v4.setName("Switch B");
         v4.setHardwareAddress("00-0B-07-B2-05-E3");
@@ -48,6 +48,8 @@ public class Main {
 
         network.displayNetwork();
         network.displayIdentifiableNodes();
-
+        System.out.println();
+        Algorithm algorithm = new Algorithm(network, v1);
+        algorithm.getShortestTimes(network, v1);
     }
 }
