@@ -1,3 +1,9 @@
+import com.github.javafaker.Faker;
+import org.jgrapht.Graph;
+import org.jgrapht.alg.spanning.PrimMinimumSpanningTree;
+import org.jgrapht.graph.DefaultWeightedEdge;
+import org.jgrapht.graph.SimpleWeightedGraph;
+
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -28,12 +34,65 @@ public class Main {
 
         Collections.sort(streets, Comparator.comparing(Street::getLength));
 
-        Set<Intersection> intersections = new HashSet<>(Arrays.asList(nodes.clone()));
+        Set<Intersection> intersections = new HashSet<>();
+        intersections.addAll(Arrays.asList(nodes));
+
         for (Intersection i : intersections) {
             for (Intersection j : intersections) {
                 if (!i.equals(j) && i.getName().equals(j.getName()))
                     System.out.println("Duplicates: " + i + " " + j);
             }
         }
+
+        Map<Intersection, List<Street>> city = new HashMap<>();
+        for (Intersection i : intersections) {
+            List<Street> adjacentStreets = new ArrayList<>();
+            for (Street s : streets) {
+                Intersection[] streetsEnds = s.getEnds();
+                if (streetsEnds[0].equals(i) || streetsEnds[1].equals(i)) {
+                    adjacentStreets.add(s);
+                }
+            }
+            city.put(i, adjacentStreets);
+        }
+
+        Faker faker = new Faker();
+        for (Street s : streets) {
+            s.setName(faker.name().lastName());
+        }
+        for (Intersection i : intersections) {
+            i.setName(faker.name().lastName());
+        }
+        City cityMap = new City(city);
+
+        streets.stream()
+                .filter(s -> s.getLength() > 1)
+                .filter(s -> cityMap.endsSum(s) > 6)
+                .forEach(System.out::println);
+
+
+        Graph<Intersection, DefaultWeightedEdge> graph = createGraph(cityMap);
+
+        PrimMinimumSpanningTree<Intersection, DefaultWeightedEdge> spanningTree = new PrimMinimumSpanningTree<>(graph);
+        System.out.println("Solution : " + spanningTree.getSpanningTree());
+    }
+
+    private static Graph<Intersection, DefaultWeightedEdge> createGraph(City city) {
+        SimpleWeightedGraph<Intersection, DefaultWeightedEdge> g = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
+        Map<Intersection, List<Street>> getCity = city.getCityMap();
+        for (Intersection i : getCity.keySet()) {
+            g.addVertex(i);
+        }
+        Set<Street> addedStreets = new HashSet<>();
+        for (Map.Entry<Intersection, List<Street>> it : getCity.entrySet()) {
+            for (int i = 0; i < it.getValue().size(); i++) {
+                if (!addedStreets.contains(it.getValue().get(i))) {
+                    addedStreets.add(it.getValue().get(i));
+                    DefaultWeightedEdge edge = g.addEdge(it.getValue().get(i).getEnds()[0], it.getValue().get(i).getEnds()[1]);
+                    g.setEdgeWeight(edge, it.getValue().get(i).getLength());
+                }
+            }
+        }
+        return g;
     }
 }

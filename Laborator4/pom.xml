@@ -17,5 +17,12 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht-core</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+
     </dependencies>
 </project>

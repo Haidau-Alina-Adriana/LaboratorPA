@@ -5,6 +5,10 @@ public class Street implements Comparable<Street> {
     private int length;
     private Intersection[] ends;
 
+    public Street(String name) {
+        this.name = name;
+    }
+
     public Street() {
         this.name = "";
         this.length = 0;
@@ -39,8 +43,9 @@ public class Street implements Comparable<Street> {
         return ends;
     }
 
-    public void setEnds(Intersection[] ends) {
-        this.ends = ends;
+    public void setEnds(Intersection end1, Intersection end2) {
+        this.ends[0] = end1;
+        this.ends[1] = end2;
     }
 
     @Override
