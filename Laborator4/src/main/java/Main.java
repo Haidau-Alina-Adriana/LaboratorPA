@@ -5,6 +5,7 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
@@ -33,6 +34,10 @@ public class Main {
         streets.add(new Street("s15", 1, nodes[7], nodes[8]));
 
         Collections.sort(streets, Comparator.comparing(Street::getLength));
+
+        List<Street> newSortedStreets = streets.stream()
+                .sorted(Comparator.comparing(Street::getLength))
+                        .collect(Collectors.toList());
 
         Set<Intersection> intersections = new HashSet<>();
         intersections.addAll(Arrays.asList(nodes));
