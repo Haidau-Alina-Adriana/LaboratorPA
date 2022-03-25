@@ -19,7 +19,8 @@ public abstract class Item implements Serializable {
     private String title;
     private String location;
 
-    public Item(){}
+    public Item() {
+    }
 
     public Item(String id, String title, String location) {
         this.id = id;

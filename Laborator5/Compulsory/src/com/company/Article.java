@@ -2,27 +2,39 @@ package com.company;
 
 
 public class Article extends Item {
-    private String author;
+    private String authors;
+    private int publishYear;
 
-    public Article(){ }
+    public Article() {
+    }
 
-    public Article(String id, String title, String location, String author) {
+    public Article(String id, String title, String location, String author, int publishYear) {
         super(id, title, location);
-        this.author = author;
+        this.authors = author;
+        this.publishYear = publishYear;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthors() {
+        return authors;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
+
+    public int getPublishYear() {
+        return publishYear;
+    }
+
+    public void setPublishYear(int publishYear) {
+        this.publishYear = publishYear;
     }
 
     @Override
     public String toString() {
         return "Article{" +
-                "author='" + author + '\'' +
+                "author='" + authors + '\'' +
+                ", publishYear=" + publishYear +
                 '}';
     }
 }
