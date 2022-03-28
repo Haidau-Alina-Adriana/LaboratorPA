@@ -1,0 +1,59 @@
+<html lang="">
+<head>
+    <title>
+        Catalog content
+    </title>
+</head>
+<body background="picture.jpg">
+
+<h1 align="center" style="color:white;">Catalog: ${catalogName}</h1>
+
+    #foreach( $item in $catalogItems )
+
+        #if ($item.id)
+        <p style="color:white; font-family: cursive; font-size:20px;">Item id: $item.id  </p>
+        #else
+        <p style="color:white; font-family: cursive; font-size:20px;">Item id: -  </p>
+        #end
+
+        #if ($item.title)
+        <p style="color:white; font-family: cursive; font-size:20px;">Item title: $item.title  </p>
+        #else
+        <p style="color:white; font-family: cursive; font-size:20px;">Item title: -  </p>
+        #end
+
+        #if ($item.location)
+        <p style="color:white; font-family: cursive; font-size:20px;">Item location: $item.location  </p>
+        #else
+        <p style="color:white; font-family: cursive; font-size:20px;">Item location: -  </p>
+        #end
+
+        #if ($item.authors)
+        <p style="color:white; font-family: cursive; font-size:20px;">Item authors: $item.authors  </p>
+        #else
+        <p style="color:white; font-family: cursive; font-size:20px;">Item authors: -  </p>
+        #end
+
+        #if ($item.publishYear)
+        <p style="color:white; font-family: cursive; font-size:20px;">Item publish year: $item.publishYear   </p>
+        #else
+        <p style="color:white; font-family: cursive; font-size:20px;">Item publish year: -  </p>
+        #end
+
+        #if ($item.language)
+        <p style="color:white; font-family: cursive; font-size:20px;">Item language: $item.language </p>
+        #else
+        <p style="color:white; font-family: cursive; font-size:20px;">Item language: - </p>
+        #end
+
+        #if ($item.category)
+        <p style="color:white; font-family: cursive; font-size:20px;">Item category: $item.category </p>
+        #else
+        <p style="color:white; font-family: cursive; font-size:20px;">Item category: - </p>
+        #end
+
+    <br>
+    #end
+
+</body>
+</html>
