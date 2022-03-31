@@ -10,7 +10,7 @@ public class MainFrame extends JFrame {
     DrawingPanel canvas;
 
     public MainFrame() {
-        super("My Drawing Application");
+        super("Laborator 6");
         init();
     }
 
