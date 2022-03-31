@@ -46,7 +46,16 @@ public class Catalog implements Serializable {
     public void list() {
         System.out.println("Items: ");
         for (Item item : items) {
-            System.out.println(item);
+            System.out.print("Item: " + item.getId() + ", " + item.getTitle()
+                    + ", " + item.getLocation());
+            if (item instanceof Book) {
+                Book b = (Book) item;
+                System.out.println(", " + b.getAuthors() + ", " + b.getCategory() + ", " + b.getLanguage()
+                        + ", " + b.getPublishYear());
+            } else if (item instanceof Article) {
+                Article a = (Article) item;
+                System.out.println(", " + a.getAuthors() + ", " + a.getPublishYear());
+            }
         }
     }
 
