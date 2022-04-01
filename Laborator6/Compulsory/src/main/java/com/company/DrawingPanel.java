@@ -19,7 +19,6 @@ public class DrawingPanel extends JPanel {
 
     public DrawingPanel(MainFrame frame) {
         this.frame = frame;
-        createOffscreenImage();
         init();
     }
 
@@ -41,13 +40,6 @@ public class DrawingPanel extends JPanel {
                 repaint();
             }
         });
-    }
-
-    private void createOffscreenImage() {
-        image = new BufferedImage(canvasWidth, canvasHeight, BufferedImage.TYPE_INT_ARGB);
-        offscreen = image.createGraphics();
-        offscreen.setColor(Color.WHITE);
-        offscreen.fillRect(0, 0, canvasWidth, canvasHeight);
     }
 
     private void paintGrid(Graphics2D g) {
