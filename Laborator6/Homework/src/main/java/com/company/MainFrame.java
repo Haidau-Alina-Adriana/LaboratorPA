@@ -6,6 +6,7 @@ import static java.awt.BorderLayout.*;
 
 public class MainFrame extends JFrame {
     ConfigPanel configPanel;
+
     ControlPanel controlPanel;
     DrawingPanel canvas;
 

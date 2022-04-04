@@ -1,11 +1,11 @@
 package com.company;
 
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class ConfigPanel extends JPanel {
     final MainFrame frame;
-    private JLabel label;
     private JSpinner width;
     private JSpinner height;
     private final JButton createButton = new JButton("Create");
@@ -16,9 +16,10 @@ public class ConfigPanel extends JPanel {
     }
 
     private void init() {
-        this.label = new JLabel("Grid size:");
-        height = new JSpinner(new SpinnerNumberModel(10, 2, 100, 1));
-        width = new JSpinner(new SpinnerNumberModel(10, 2, 100, 1));
+        JLabel label;
+        label = new JLabel("Grid size:");
+        height = new JSpinner(new SpinnerNumberModel(7, 3, 100, 1));
+        width = new JSpinner(new SpinnerNumberModel(7, 3, 100, 1));
 
         add(label);
         add(height);
@@ -27,18 +28,18 @@ public class ConfigPanel extends JPanel {
         createButton.addActionListener(this::createGame);
     }
 
-    public int getRows(){
+    public int getRows() {
         return (int) height.getValue();
     }
 
-    public int getCols(){
+    public int getCols() {
         return (int) width.getValue();
     }
 
     private void createGame(ActionEvent e) {
-        frame.canvas.setRows((int)this.height.getValue());
-        frame.canvas.setCols((int)this.width.getValue());
-        frame.canvas.callInit();
+        frame.canvas.setRows((int) this.height.getValue());
+        frame.canvas.setCols((int) this.width.getValue());
+        frame.canvas.reinitializeCanvas();
     }
 
 
