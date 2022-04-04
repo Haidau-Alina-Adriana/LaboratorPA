@@ -25,6 +25,9 @@ public class DrawingPanel extends JPanel {
     private Board board;
     private Stone previousStone = null;
     private boolean endOfGame;
+    Player player;
+    private Game game;
+    int turn = 0;
 
     public DrawingPanel(MainFrame frame) {
         this.frame = frame;
@@ -78,7 +81,12 @@ public class DrawingPanel extends JPanel {
         List<Player> players = new ArrayList<>();
         players.add(new Player("PlayerOne", Color.blue));
         players.add(new Player("PlayerTwo", Color.red));
-        Game game = new Game(board, players);
+        endOfGame = false;
+        previousStone = null;
+        turn = 0;
+        player = players.get(turn);
+        game = new Game(board, players);
+        positions = game.getPositions();
         play(game);
     }
 
@@ -250,42 +258,17 @@ public class DrawingPanel extends JPanel {
     }
 
     public void play(Game game) {
-        positions = game.getPositions();
-        List<Player> players = game.getPlayers();
-        int turn = 0;
-
-        paintStone(players.get(turn).getColor());
-        turn += 1;
-//
-//        while (!endOfGame) {
-//            if (turn == 0) {
-//                paintStone(players.get(turn).getColor());
-//                turn += 1;
-//            } else {
-//                paintStone(players.get(turn).getColor());
-//                turn -= 1;
-//            }
-//        }
-//        if (turn == 0) {
-//            System.out.println("Winner is: " + players.get(1).getName());
-//        } else {
-//            System.out.println("Winner is: " + players.get(0).getName());
-//        }
-
-
-//        for(Map.Entry<Stone, Player> entry : positions.entrySet()){
-//            System.out.println(entry);
-//        }
-
+        //positions = game.getPositions();
+        paintStone();
     }
 
-    public void paintStone(Color color) {
+    public void paintStone() {
         offscreen.setStroke(new BasicStroke(5.0f));
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 x = e.getX();
                 y = e.getY();
-                if (checkStone(x, y, color)) {
+                if (checkStone(x, y)) {
                     repaint();
                 }
             }
@@ -297,33 +280,54 @@ public class DrawingPanel extends JPanel {
     }
 
     public boolean isAdjacentStone(Stone stone) {
-        if(previousStone == null){
+        if (previousStone == null) {
             return true;
         }
-        return stone.getIndex() == (previousStone.getIndex() + 1) || stone.getIndex() == (previousStone.getIndex() - 1) ||
-                stone.getIndex() == (previousStone.getIndex() + cols) || stone.getIndex() == (previousStone.getIndex() - cols);
+        return board.getEdges().get(previousStone).contains(stone);
     }
 
-    public boolean checkStone(int x, int y, Color color) {
-        offscreen.setColor(color);
+    public boolean checkStone(int x, int y) {
+        offscreen.setColor(player.getColor());
+        boolean isSelected = false;
         for (Stone stone : board.getEdges().keySet()) {
-            if (x > stone.getX() - stoneSize / 2 && x < stone.getX() + stoneSize / 2 && y > stone.getY() - stoneSize / 2 && y < stone.getY() + stoneSize / 2) {
+            if (x > stone.getX() - stoneSize / 2 && x < stone.getX() + stoneSize / 2
+                    && y > stone.getY() - stoneSize / 2 && y < stone.getY() + stoneSize / 2) {
                 if (isUnselectedStone(stone)) {
                     if (isAdjacentStone(stone)) {
                         offscreen.fillOval(stone.getX() - stoneSize / 2, stone.getY() - stoneSize / 2, stoneSize, stoneSize);
                         previousStone = stone;
+                        if (turn == 0) {
+                            turn = 1;
+                        } else {
+                            turn = 0;
+                        }
+                        player = game.getPlayers().get(turn);
+                        positions.put(stone, player);
                         return true;
                     } else {
                         endOfGame = true;
-                        System.out.println("Not a valid move, stone not adjacent! You have lost!");
+                        break;
                     }
                 } else {
-                    System.out.println("Stone already selected");
+                    isSelected = true;
+                    break;
                 }
-            } else {
-                System.out.println("Not a stone!");
             }
         }
+
+        if (endOfGame) {
+            System.out.println("Not a valid move, stone not adjacent! You have lost!");
+            if (turn == 0) {
+                System.out.println("Winner is: " + game.getPlayers().get(0).getName());
+            } else {
+                System.out.println("Winner is: " + game.getPlayers().get(1).getName());
+            }
+        } else if (isSelected) {
+            System.out.println("Stone already selected");
+        } else {
+            System.out.println("Not a stone");
+        }
+
         return false;
     }
 
