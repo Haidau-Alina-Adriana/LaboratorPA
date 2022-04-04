@@ -40,6 +40,7 @@ public class ConfigPanel extends JPanel {
         frame.canvas.setRows((int) this.height.getValue());
         frame.canvas.setCols((int) this.width.getValue());
         frame.canvas.reinitializeCanvas();
+
     }
 
 

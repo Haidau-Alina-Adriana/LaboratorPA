@@ -20,19 +20,25 @@ public class DrawingPanel extends JPanel {
     private BufferedImage image;
     private Graphics2D offscreen;
 
+
     private List<Stone> stones;
     private Map<Stone, Player> positions;
     private Board board;
-    private Stone previousStone = null;
+    private Stone previousStone;
     private boolean endOfGame;
     Player player;
     private Game game;
-    int turn = 0;
+    int turn;
+    List<Player> players = new ArrayList<>();
+    MouseAdapter mouse;
+
 
     public DrawingPanel(MainFrame frame) {
         this.frame = frame;
         createOffscreenImage();
         init();
+        players.add(new Player("PlayerOne", Color.blue));
+        players.add(new Player("PlayerTwo", Color.red));
     }
 
     private void createOffscreenImage() {
@@ -78,16 +84,14 @@ public class DrawingPanel extends JPanel {
         paintGrid();
         getStonesCoordinates();
         board = new Board(paintAndCreateSticks());
-        List<Player> players = new ArrayList<>();
-        players.add(new Player("PlayerOne", Color.blue));
-        players.add(new Player("PlayerTwo", Color.red));
+        game = new Game(board, players);
+        positions = game.getPositions();
         endOfGame = false;
         previousStone = null;
         turn = 0;
         player = players.get(turn);
-        game = new Game(board, players);
-        positions = game.getPositions();
-        play(game);
+
+        paintStone();
     }
 
     private void paintGrid() {
@@ -257,14 +261,9 @@ public class DrawingPanel extends JPanel {
         return neighbours;
     }
 
-    public void play(Game game) {
-        //positions = game.getPositions();
-        paintStone();
-    }
-
     public void paintStone() {
         offscreen.setStroke(new BasicStroke(5.0f));
-        this.addMouseListener(new MouseAdapter() {
+        mouse = new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 x = e.getX();
                 y = e.getY();
@@ -272,11 +271,15 @@ public class DrawingPanel extends JPanel {
                     repaint();
                 }
             }
-        });
+        };
+        this.addMouseListener(mouse);
     }
 
-    public boolean isUnselectedStone(Stone stone) {
-        return positions.get(stone) == null;
+    public boolean isAvailableStone(Stone stone) {
+        if (positions.get(stone) != null) {
+            return false;
+        }
+        return true;
     }
 
     public boolean isAdjacentStone(Stone stone) {
@@ -288,13 +291,17 @@ public class DrawingPanel extends JPanel {
 
     public boolean checkStone(int x, int y) {
         offscreen.setColor(player.getColor());
-        boolean isSelected = false;
+        boolean foundStone = false;
         for (Stone stone : board.getEdges().keySet()) {
+            if(endOfGame){
+                break;
+            }
             if (x > stone.getX() - stoneSize / 2 && x < stone.getX() + stoneSize / 2
                     && y > stone.getY() - stoneSize / 2 && y < stone.getY() + stoneSize / 2) {
-                if (isUnselectedStone(stone)) {
+                if (isAvailableStone(stone)) {
                     if (isAdjacentStone(stone)) {
                         offscreen.fillOval(stone.getX() - stoneSize / 2, stone.getY() - stoneSize / 2, stoneSize, stoneSize);
+                        positions.put(stone, player);
                         previousStone = stone;
                         if (turn == 0) {
                             turn = 1;
@@ -302,34 +309,34 @@ public class DrawingPanel extends JPanel {
                             turn = 0;
                         }
                         player = game.getPlayers().get(turn);
-                        positions.put(stone, player);
                         return true;
                     } else {
                         endOfGame = true;
+                        foundStone = true;
+                        frame.canvas.removeMouseListener(mouse);
+                        System.out.println("Not a valid move! You have lost!");
+                        if (turn == 0) {
+                            System.out.println("Winner is: " + game.getPlayers().get(1).getName());
+                        } else {
+                            System.out.println("Winner is: " + game.getPlayers().get(0).getName());
+                        }
                         break;
                     }
                 } else {
-                    isSelected = true;
+                    foundStone = true;
+                    System.out.println("Stone already selected!");
                     break;
                 }
             }
         }
-
-        if (endOfGame) {
-            System.out.println("Not a valid move, stone not adjacent! You have lost!");
-            if (turn == 0) {
-                System.out.println("Winner is: " + game.getPlayers().get(0).getName());
-            } else {
-                System.out.println("Winner is: " + game.getPlayers().get(1).getName());
-            }
-        } else if (isSelected) {
-            System.out.println("Stone already selected");
-        } else {
-            System.out.println("Not a stone");
+        if (!foundStone && !endOfGame) {
+            System.out.println("Not a stone!");
+        }else if(endOfGame){
+            System.out.println("Start new game!");
         }
-
         return false;
     }
+
 
     public BufferedImage getCurrentState() {
         return image;
