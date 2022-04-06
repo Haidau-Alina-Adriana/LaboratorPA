@@ -1,6 +1,8 @@
 package com.company;
 
-public class Stone implements Comparable<Stone>{
+import java.io.Serializable;
+
+public class Stone implements Comparable<Stone>, Serializable {
     private int index;
     private int x, y;
 
@@ -37,8 +39,9 @@ public class Stone implements Comparable<Stone>{
                 ", y=" + y +
                 '}';
     }
+
     @Override
     public int compareTo(Stone stone) {
-        return (int)(this.index - stone.getIndex());
+        return this.index - stone.getIndex();
     }
 }

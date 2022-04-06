@@ -1,11 +1,13 @@
 package com.company;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Board {
-
+public class Board implements Serializable {
     private Map<Stone, List<Stone>> edges;
 
     public Board() {

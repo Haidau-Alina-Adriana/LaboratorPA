@@ -1,11 +1,12 @@
 package com.company;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -34,9 +35,24 @@ public class ControlPanel extends JPanel {
     }
 
     private void loadGame(ActionEvent e) {
+        Game game;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            game = new ObjectMapper().readValue(new File("savedGame.json"), Game.class);
+            System.out.println(game.toString());
+        } catch (IOException exception) {
+            System.out.println(exception);
+        }
     }
 
     private void saveGame(ActionEvent e) {
+        Game game = frame.canvas.getCurrentGame();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            objectMapper.writeValue(new File("savedGame.json"), game);
+        } catch (IOException exception) {
+            System.out.println(exception);
+        }
     }
 
     private void exportGame(ActionEvent e) {

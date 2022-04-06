@@ -91,6 +91,7 @@ public class DrawingPanel extends JPanel {
         turn = 0;
         player = players.get(turn);
 
+        frame.canvas.removeMouseListener(mouse);
         paintStone();
     }
 
@@ -293,7 +294,7 @@ public class DrawingPanel extends JPanel {
         offscreen.setColor(player.getColor());
         boolean foundStone = false;
         for (Stone stone : board.getEdges().keySet()) {
-            if(endOfGame){
+            if (endOfGame) {
                 break;
             }
             if (x > stone.getX() - stoneSize / 2 && x < stone.getX() + stoneSize / 2
@@ -314,7 +315,7 @@ public class DrawingPanel extends JPanel {
                         endOfGame = true;
                         foundStone = true;
                         frame.canvas.removeMouseListener(mouse);
-                        System.out.println("Not a valid move! You have lost!");
+                        System.out.println("Not a valid move! You have lost!\n");
                         if (turn == 0) {
                             System.out.println("Winner is: " + game.getPlayers().get(1).getName());
                         } else {
@@ -324,15 +325,15 @@ public class DrawingPanel extends JPanel {
                     }
                 } else {
                     foundStone = true;
-                    System.out.println("Stone already selected!");
+                    System.out.println("Stone already selected!\n");
                     break;
                 }
             }
         }
         if (!foundStone && !endOfGame) {
-            System.out.println("Not a stone!");
-        }else if(endOfGame){
-            System.out.println("Start new game!");
+            System.out.println("Not a stone!\n");
+        } else if (endOfGame) {
+            System.out.println("Start new game!\n");
         }
         return false;
     }
@@ -348,5 +349,13 @@ public class DrawingPanel extends JPanel {
 
     public void setCols(int cols) {
         this.cols = cols;
+    }
+
+    public Game getCurrentGame() {
+        Game game = new Game();
+        game.setBoard(board);
+        game.setPlayers(players);
+        game.setPositions(positions);
+        return game;
     }
 }

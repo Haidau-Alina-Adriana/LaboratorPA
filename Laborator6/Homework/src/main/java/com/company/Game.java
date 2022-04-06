@@ -1,8 +1,11 @@
 package com.company;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class Game {
+public class Game implements Serializable {
     private Board board;
     private List<Player> players;
     private Map<Stone, Player> positions;
@@ -10,10 +13,10 @@ public class Game {
     public Game() {
     }
 
-    public Game(Board board){
+    public Game(Board board) {
         this.board = board;
         this.positions = new TreeMap<>();
-        for(Stone stone : board.getEdges().keySet()){
+        for (Stone stone : board.getEdges().keySet()) {
             positions.put(stone, null);
         }
     }
@@ -23,21 +26,25 @@ public class Game {
         this.players = new ArrayList<>();
         this.players = players;
         this.positions = new TreeMap<>();
-        for(Stone stone : board.getEdges().keySet()){
+        for (Stone stone : board.getEdges().keySet()) {
             positions.put(stone, null);
         }
+    }
+
+    public Board getBoard() {
+        return board;
     }
 
     public void setBoard(Board board) {
         this.board = board;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
-
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public Map<Stone, Player> getPositions() {
