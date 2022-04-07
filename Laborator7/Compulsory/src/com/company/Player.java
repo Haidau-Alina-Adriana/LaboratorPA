@@ -15,17 +15,20 @@ public class Player implements Runnable {
 
     private boolean submitWord() {
         List<Tile> extracted = game.getBag().extractTiles(7);
-//        System.out.println("Extracted tiles: " + extracted);
         if (extracted.isEmpty()) {
             return false;
         }
         StringBuilder word = new StringBuilder();
-        for(Tile tile :  extracted){
+        for (Tile tile : extracted) {
             word.append(tile.getLetter());
         }
         game.getBoard().addWord(this, word.toString());
-//        System.out.println("");
-//        make the player sleep 50 ms;
+
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
         return true;
     }
 

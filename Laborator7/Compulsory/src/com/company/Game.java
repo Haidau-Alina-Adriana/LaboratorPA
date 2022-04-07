@@ -16,8 +16,13 @@ public class Game {
     }
 
     public void play() {
-        for (Player player : players) {
-            new Thread(player).start();
+//        for (Player player : players) {
+//            new Thread(player).start();
+//        }
+        while(bag.getTiles().size() > 0){
+            new Thread(players.get(0)).start();
+            new Thread(players.get(1)).start();
+            new Thread(players.get(2)).start();
         }
     }
 
