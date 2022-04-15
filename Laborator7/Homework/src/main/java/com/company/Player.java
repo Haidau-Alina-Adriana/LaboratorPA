@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements Runnable {
@@ -19,6 +18,7 @@ public class Player implements Runnable {
 
         StringBuilder word = new StringBuilder();
         while ((Game.turn % game.getPlayers().size()) != this.index && game.getBag().getTiles().size() > 0) {
+//            System.out.println("\n--- " + game.getBag().getTiles().size());
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -29,6 +29,7 @@ public class Player implements Runnable {
         List<Tile> extracted = game.getBag().extractTiles(7, this);
         if (extracted.isEmpty()) {
             setRunning(false);
+           // game.stopDaemonThread();
             return false;
         }
 
@@ -73,9 +74,9 @@ public class Player implements Runnable {
 
     @Override
     public void run() {
-        while (running) {
+        //while (running) {
             submitWord();
-        }
+        //}
 
     }
 

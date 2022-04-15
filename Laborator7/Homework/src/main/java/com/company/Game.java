@@ -10,7 +10,7 @@ public class Game {
     private final List<Player> players = new ArrayList<>();
     private static int index = 0;
     public static int turn = 0;
-    private DaemonThread daemonThread = new DaemonThread();
+    private static DaemonThread daemonThread = new DaemonThread();
 
     public void addPlayer(Player player) {
         players.add(player);
@@ -21,14 +21,23 @@ public class Game {
 
     public void play() {
         daemonThread.setDaemon(true);
-        daemonThread.start();
+//        daemonThread.setRunning(true);
+       // daemonThread.start();
 
         while (bag.getTiles().size() > 0) {
+           // new Thread(daemonThread).start();
             new Thread(players.get(0)).start();
+//            System.out.println(bag.getTiles().size());
+
             new Thread(players.get(1)).start();
             new Thread(players.get(2)).start();
+
         }
 
+    }
+
+    public void stopDaemonThread(){
+        daemonThread.setRunning(false);
     }
 
     public Bag getBag() {

@@ -1,13 +1,15 @@
 package com.company;
 
+import static java.lang.Thread.sleep;
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Game game = new Game();
         game.addPlayer(new Player("PlayerOne"));
         game.addPlayer(new Player("PlayerTwo"));
         game.addPlayer(new Player("PlayerThree"));
         game.play();
+        sleep(1000);
 
         if (game.getBag().getTiles().size() == 0) {
             int playerOneScore = game.getPlayers().get(0).getScore();
@@ -23,9 +25,7 @@ public class Main {
                 System.out.println(game.getPlayers().get(1).getName());
             else
                 System.out.println(game.getPlayers().get(2).getName());
-
         }
-
 
     }
 }
