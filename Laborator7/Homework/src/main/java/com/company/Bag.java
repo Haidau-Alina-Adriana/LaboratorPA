@@ -87,7 +87,7 @@ public class Bag {
         }
     }
 
-    public synchronized List<Tile> extractTiles(int howMany, Player p) {
+    public synchronized List<Tile> extractTiles(int howMany) {
 
         List<Tile> extracted = new ArrayList<>();
         Random randomTile = new Random();
@@ -99,7 +99,6 @@ public class Bag {
             extracted.add(tiles.get(result));
             tiles.remove(tiles.get(result));
         }
-
         return extracted;
     }
 

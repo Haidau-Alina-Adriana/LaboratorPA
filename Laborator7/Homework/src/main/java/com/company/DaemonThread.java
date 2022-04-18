@@ -5,21 +5,16 @@ public class DaemonThread extends Thread implements Runnable {
     private boolean running = false;
 
     public void run() {
-//        while (running) {
-            time += (float) 1 / 1000.0f;
-//            display();
-            if (time > 100) {
+        while (running) {
+            time += (float) 1 / 10000000.f;
+            if (time > 180000) {
                 System.out.println("Time exceeded!");
             }
-//        }
+        }
     }
 
-    public void display() {
-        System.out.println(time);
-    }
-
-    public boolean isRunning() {
-        return running;
+    public float getTime() {
+        return time;
     }
 
     public void setRunning(boolean running) {

@@ -3,46 +3,49 @@ package com.company;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MockDictionary implements Dictionary {
+    private final List<String> validWords;
 
-    public synchronized boolean isWord(String word) {
+    public MockDictionary(String filename) {
+        this.validWords = new ArrayList<>();
         try {
             String str;
-            BufferedReader br = new BufferedReader(new FileReader("dictionary.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(filename));
             while ((str = br.readLine()) != null) {
-                if (str.equals(word)) {
-                    return true;
-                }
+                validWords.add(str);
             }
         } catch (IOException ex) {
             System.out.println(ex);
+        }
+    }
+
+    public synchronized boolean isWord(String word) {
+        for (String validWord : validWords) {
+            if (validWord.equals(word)) {
+                return true;
+            }
         }
         return false;
     }
 
     public synchronized String createWordFromRandomLetters(String word) {
         String newWord = "";
-        try {
-            String str;
-            BufferedReader br = new BufferedReader(new FileReader("dictionary.txt"));
-            while ((str = br.readLine()) != null) {
-                str = str.toLowerCase();
-                boolean ok = true;
-                for (int i = 0; i < word.length(); i++) {
-                    String letter = Character.toString(word.charAt(i));
-                    if (!str.contains(letter)) {
-                        ok = false;
-                        break;
-                    }
+        for (String validWord : validWords) {
+            validWord = validWord.toLowerCase();
+            boolean ok = true;
+            for (int i = 0; i < word.length(); i++) {
+                String letter = Character.toString(word.charAt(i));
+                if (!validWord.contains(letter)) {
+                    ok = false;
+                    break;
                 }
-                if (ok && word.length() >= str.length()) {
-                    return str;
-                }
-
             }
-        } catch (IOException ex) {
-            System.out.println(ex);
+            if (ok && word.length() >= validWord.length()) {
+                return validWord;
+            }
         }
         return newWord;
     }

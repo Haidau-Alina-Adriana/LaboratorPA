@@ -15,10 +15,8 @@ public class Player implements Runnable {
     }
 
     private synchronized boolean submitWord() {
-
         StringBuilder word = new StringBuilder();
         while ((Game.turn % game.getPlayers().size()) != this.index && game.getBag().getTiles().size() > 0) {
-//            System.out.println("\n--- " + game.getBag().getTiles().size());
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -26,25 +24,24 @@ public class Player implements Runnable {
             }
         }
 
-        List<Tile> extracted = game.getBag().extractTiles(7, this);
+        List<Tile> extracted = game.getBag().extractTiles(7);
+        notifyAll();
+
         if (extracted.isEmpty()) {
             setRunning(false);
-           // game.stopDaemonThread();
+            game.stopDaemonThread();
             return false;
         }
-
-        notifyAll();
 
         for (Tile tile : extracted) {
             word.append(tile.getLetter());
         }
-        String newWord = new MockDictionary().createWordFromRandomLetters(word.toString());
-
+        String newWord = Game.dictionary.createWordFromRandomLetters(word.toString());
 
         score += game.getBoard().addWord(this, newWord);
 
         try {
-            Thread.sleep(50);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             System.out.println(e);
         }
@@ -74,10 +71,12 @@ public class Player implements Runnable {
 
     @Override
     public void run() {
-        //while (running) {
+        while (running) {
+            if (game.getBag().getTiles().size() == 0) {
+                break;
+            }
             submitWord();
-        //}
-
+        }
     }
 
     public void setRunning(boolean running) {
