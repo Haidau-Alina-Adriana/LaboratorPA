@@ -1,12 +1,33 @@
 package com.company;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        Database.getConnection().commit();
         try {
+
+            PreparedStatement query1 = Database.getConnection().prepareStatement("DROP TABLE continents");
+            PreparedStatement query2 = Database.getConnection().prepareStatement("DROP TABLE countries");
+            PreparedStatement query3 = Database.getConnection().prepareStatement("CREATE TABLE countries (\n" +
+                    "    id number," +
+                    "    name varchar(50)," +
+                    "    code number," +
+                    "    continent varchar(50)" +
+                    ")");
+            PreparedStatement query4 = Database.getConnection().prepareStatement("CREATE TABLE continents (\n" +
+                    "    id number," +
+                    "    name varchar(50)" +
+                    ")");
+
+            query1.executeUpdate();
+            query2.executeUpdate();
+            query3.executeUpdate();
+            query4.executeUpdate();
+
+            Database.getConnection().commit();
+
             var continents = new ContinentDAO();
             continents.create(new Continent("Europe"));
             continents.create(new Continent("America"));
