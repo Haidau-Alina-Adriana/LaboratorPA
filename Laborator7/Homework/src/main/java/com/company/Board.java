@@ -40,6 +40,8 @@ public class Board {
             words.add(word);
             System.out.println("Player " + player.getIndex() + " added word: " + word + " to the table, and gained "
                     + obtainedScore + " points.");
+        } else {
+            System.out.println("Not a valid word!");
         }
 
         Game.turn++;

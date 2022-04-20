@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Player implements Runnable {
     private final String name;
@@ -15,7 +16,6 @@ public class Player implements Runnable {
     }
 
     private synchronized boolean submitWord() {
-        StringBuilder word = new StringBuilder();
         while ((Game.turn % game.getPlayers().size()) != this.index && game.getBag().getTiles().size() > 0) {
             try {
                 wait();
@@ -32,13 +32,15 @@ public class Player implements Runnable {
             game.stopDaemonThread();
             return false;
         }
-
+        StringBuilder word = new StringBuilder();
         for (Tile tile : extracted) {
             word.append(tile.getLetter());
         }
-        String newWord = Game.dictionary.createWordFromRandomLetters(word.toString());
+        String wordCreatedByThread = Game.dictionary.createWordFromRandomLetters(word.toString());
+        score += game.getBoard().addWord(this, wordCreatedByThread);
 
-        score += game.getBoard().addWord(this, newWord);
+//        String wordCreatedByUser = getWordFromUser(word.toString(), index);
+//        score += game.getBoard().addWord(this, wordCreatedByUser);
 
         try {
             Thread.sleep(100);
@@ -46,6 +48,17 @@ public class Player implements Runnable {
             System.out.println(e);
         }
         return true;
+    }
+
+    public String getWordFromUser(String word, int index) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Player " + index + "'s turn.\n" + "Available letters: ");
+        for (int i = 0; i < word.length(); i++) {
+            System.out.print(word.charAt(i) + " ");
+        }
+        System.out.print("\nWord: ");
+        String wordCreatedByUser = input.next();
+        return wordCreatedByUser;
     }
 
     public String getName() {

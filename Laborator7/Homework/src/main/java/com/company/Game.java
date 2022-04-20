@@ -1,12 +1,13 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Game {
     private final Bag bag = new Bag();
     private final Board board = new Board(new ArrayList<>(), this);
-    public static final Dictionary dictionary = new MockDictionary("dictionary.txt");
+    public static final MockDictionary dictionary = new MockDictionary("dictionary.txt");
     private final List<Player> players = new ArrayList<>();
     private static int index = 0;
     public static int turn = 0;
@@ -28,6 +29,10 @@ public class Game {
             new Thread(players.get(0)).start();
             new Thread(players.get(1)).start();
             new Thread(players.get(2)).start();
+            if (bag.getTiles().size() == 0) {
+                daemonThread.setEndTime(new Date());
+                break;
+            }
         }
     }
 
@@ -35,8 +40,8 @@ public class Game {
         daemonThread.setRunning(false);
     }
 
-    public float getTime() {
-        return daemonThread.getTime();
+    public double getGameDuration() {
+        return daemonThread.getDuration();
     }
 
     public Bag getBag() {

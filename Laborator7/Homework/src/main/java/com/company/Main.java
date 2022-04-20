@@ -30,7 +30,7 @@ public class Main {
                     System.out.println(game.getPlayers().get(1).getName());
                 else
                     System.out.println(game.getPlayers().get(2).getName());
-                System.out.println("Time: " + game.getTime());
+                System.out.println("Game duration (in ms): " + game.getGameDuration());
                 break;
             }
 

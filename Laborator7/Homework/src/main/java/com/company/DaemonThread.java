@@ -1,20 +1,30 @@
 package com.company;
 
+import java.util.Date;
+
 public class DaemonThread extends Thread implements Runnable {
-    private float time = 0;
     private boolean running = false;
+    private Date startingTime;
+    private Date endTime;
+
+    public DaemonThread() {
+        this.startingTime = new Date();
+    }
 
     public void run() {
         while (running) {
-            time += (float) 1 / 10000000.f;
-            if (time > 180000) {
+            Date currentTime = new Date();
+            if ((currentTime.getTime() - startingTime.getTime()) > 180000)
                 System.out.println("Time exceeded!");
-            }
         }
     }
 
-    public float getTime() {
-        return time;
+    public long getDuration() {
+        return (endTime.getTime() - startingTime.getTime());
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public void setRunning(boolean running) {
