@@ -14,7 +14,7 @@ public class DaemonThread extends Thread implements Runnable {
     public void run() {
         while (running) {
             Date currentTime = new Date();
-            if ((currentTime.getTime() - startingTime.getTime()) > 180000)
+            if ((currentTime.getTime() - startingTime.getTime()) > 6000000)
                 System.out.println("Time exceeded!");
         }
     }
