@@ -1,4 +1,7 @@
-package com.company;
+package com.company.DAO;
+
+import com.company.Database;
+import com.company.model.City;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

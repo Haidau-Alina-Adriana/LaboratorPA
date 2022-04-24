@@ -1,5 +1,11 @@
 package com.company;
 
+import com.company.DAO.CityDAO;
+import com.company.DAO.ContinentDAO;
+import com.company.DAO.CountryDAO;
+import com.company.model.City;
+import com.company.model.Continent;
+import com.company.model.Country;
 import com.opencsv.CSVReader;
 
 import java.io.FileReader;

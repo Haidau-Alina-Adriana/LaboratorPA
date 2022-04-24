@@ -1,4 +1,4 @@
-package com.company;
+package com.company.model;
 
 public class Continent {
     private static int index = 1;
