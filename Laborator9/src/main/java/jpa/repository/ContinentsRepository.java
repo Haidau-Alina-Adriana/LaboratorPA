@@ -7,12 +7,13 @@ import jpa.utils.EntityManagerResponsible;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
-public class ContinentRepository {
+public class ContinentsRepository {
     public static EntityManager entityManager;
     public static EntityTransaction entityTransaction;
 
-    public ContinentRepository() {
+    public ContinentsRepository() {
         entityManager = EntityManagerResponsible.getInstance().createEntityManager();
         entityTransaction = entityManager.getTransaction();
     }
@@ -52,6 +53,12 @@ public class ContinentRepository {
     public static ContinentsEntity findById(long id) {
         ContinentsEntity continentsEntity = entityManager.find(ContinentsEntity.class, id);
         return continentsEntity;
+    }
+
+    public static List<ContinentsEntity> findByName(String name) {
+        return entityManager.createNamedQuery("ContinentDAO.findByName")
+                .setParameter("continentName", name)
+                .getResultList();
     }
 
 }

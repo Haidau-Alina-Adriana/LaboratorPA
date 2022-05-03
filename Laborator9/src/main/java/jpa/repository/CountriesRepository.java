@@ -1,22 +1,24 @@
 package jpa.repository;
 
 import jpa.entity.CitiesEntity;
+import jpa.entity.ContinentsEntity;
+import jpa.entity.CountriesEntity;
 import jpa.utils.EntityManagerResponsible;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
-public class CityRepository {
+public class CountriesRepository {
     public static EntityManager entityManager;
     public static EntityTransaction entityTransaction;
 
-    public CityRepository() {
+    public CountriesRepository() {
         entityManager = EntityManagerResponsible.getInstance().createEntityManager();
         entityTransaction = entityManager.getTransaction();
     }
 
-    public void create(CitiesEntity entity) {
+    public void create(CountriesEntity entity) {
         beginTransaction();
         entityManager.persist(entity);
         commitTransaction();
@@ -48,10 +50,15 @@ public class CityRepository {
         }
     }
 
-    public static CitiesEntity findById(long id) {
-        CitiesEntity citiesEntity = entityManager.find(CitiesEntity.class, id);
-        return citiesEntity;
+    public static CountriesEntity findById(long id) {
+        CountriesEntity countriesEntity = entityManager.find(CountriesEntity.class, id);
+        return countriesEntity;
     }
 
+    public static List<CountriesEntity> findByName(String name) {
+        return entityManager.createNamedQuery("CountryDAO.findByName")
+                .setParameter("countryName", name)
+                .getResultList();
+    }
 
 }

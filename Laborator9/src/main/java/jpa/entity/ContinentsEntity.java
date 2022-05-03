@@ -4,9 +4,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "CONTINENTS", schema = "STUDENT")
+
+@NamedQueries({
+        @NamedQuery(name = "ContinentDAO.findById",
+                query = "select c from ContinentsEntity c order by c.id"),
+        @NamedQuery(name = "ContinentDAO.findByName",
+                query = "select c from ContinentsEntity c where c.name = :continentName"),
+})
+
+
 public class ContinentsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
     @Column(name = "id")
     private Long id;
     private String name;
@@ -49,5 +57,13 @@ public class ContinentsEntity {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ContinentsEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

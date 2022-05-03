@@ -5,9 +5,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "CITIES", schema = "STUDENT")
 
+@NamedQueries({
+        @NamedQuery(name = "CityDAO.findById",
+                query = "select c from CitiesEntity c order by c.id"),
+        @NamedQuery(name = "CityDAO.findByName",
+                query = "select c from CitiesEntity c where c.name = :cityName"),
+})
+
 public class CitiesEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
     @Column(name = "id")
     private Long id;
     private String country;
@@ -102,5 +108,17 @@ public class CitiesEntity {
         result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
         result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CitiesEntity{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                ", name='" + name + '\'' +
+                ", capital=" + capital +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }
