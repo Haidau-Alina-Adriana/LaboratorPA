@@ -103,7 +103,6 @@ public class Main {
         CitiesEntity findCity = CitiesRepository.findById(2);
         System.out.println(findCity.toString());
 
-
         entityManager.close();
         entityManagerFactory.close();
         Database.closeConnection();
