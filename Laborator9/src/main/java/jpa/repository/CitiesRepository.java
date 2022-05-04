@@ -35,7 +35,6 @@ public class CitiesRepository {
     protected void commitTransaction() {
         try {
             entityTransaction.commit();
-            //entityManager.close();
         } catch (IllegalStateException e) {
             rollbackTransaction();
         }

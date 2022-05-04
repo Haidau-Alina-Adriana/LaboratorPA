@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException{
 
         PreparedStatement query1 = Database.getConnection().prepareStatement("DROP TABLE continents");
         PreparedStatement query2 = Database.getConnection().prepareStatement("DROP TABLE countries");

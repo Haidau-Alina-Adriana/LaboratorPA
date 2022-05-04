@@ -36,7 +36,6 @@ public class ContinentsRepository {
     protected void commitTransaction() {
         try {
             entityTransaction.commit();
-            //entityManager.close();
         } catch (IllegalStateException e) {
             rollbackTransaction();
         }
