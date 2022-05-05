@@ -55,7 +55,7 @@ public class CountriesRepository {
     }
 
     public static List<CountriesEntity> findByName(String name) {
-        return entityManager.createNamedQuery("CountryDAO.findByName")
+        return entityManager.createNamedQuery("Country.findByName")
                 .setParameter("countryName", name)
                 .getResultList();
     }

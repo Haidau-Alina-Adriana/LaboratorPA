@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Table(name = "COUNTRIES", schema = "STUDENT")
 
 @NamedQueries({
-        @NamedQuery(name = "CountryDAO.findById",
+        @NamedQuery(name = "Country.findById",
                 query = "select c from CountriesEntity c order by c.id"),
-        @NamedQuery(name = "CountryDAO.findByName",
+        @NamedQuery(name = "Country.findByName",
                 query = "select c from CountriesEntity c where c.name = :countryName"),
 })
 

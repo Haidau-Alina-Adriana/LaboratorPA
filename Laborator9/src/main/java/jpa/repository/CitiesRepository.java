@@ -54,7 +54,7 @@ public class CitiesRepository {
     }
 
     public static List<CitiesEntity> findByName(String name) {
-        return entityManager.createNamedQuery("CityDAO.findByName")
+        return entityManager.createNamedQuery("City.findByName")
                 .setParameter("cityName", name)
                 .getResultList();
     }

@@ -55,7 +55,7 @@ public class ContinentsRepository {
     }
 
     public static List<ContinentsEntity> findByName(String name) {
-        return entityManager.createNamedQuery("ContinentDAO.findByName")
+        return entityManager.createNamedQuery("Continent.findByName")
                 .setParameter("continentName", name)
                 .getResultList();
     }
