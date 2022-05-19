@@ -13,8 +13,9 @@ public class PersonController {
     private final List<Person> persons = new ArrayList<>();
 
     public PersonController() {
-        persons.add(new Person(1, "Ioana"));
-        persons.add(new Person(2, "Maria"));
+        persons.add(new Person(1, "Elena"));
+        persons.add(new Person(2, "Anca"));
+        persons.add(new Person(2, "Roxana"));
     }
 
     @GetMapping
